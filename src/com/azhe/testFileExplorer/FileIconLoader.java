@@ -1,5 +1,6 @@
 package com.azhe.testFileExplorer;
 
+import android.content.Context;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.widget.ImageView;
@@ -12,6 +13,15 @@ import android.widget.ImageView;
  * To change this template use File | Settings | File Templates.
  */
 public class FileIconLoader implements Callback {
+
+    private Context mContext;
+
+    private IconLoadFinishListener iconLoadListener;
+
+    public FileIconLoader(Context context, IconLoadFinishListener l){
+        mContext = context;
+        iconLoadListener = l;
+    }
 
     public abstract static interface IconLoadFinishListener {
         void onIconLoadFinished(ImageView view);

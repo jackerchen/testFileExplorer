@@ -1,5 +1,6 @@
 package com.azhe.testFileExplorer;
 
+import android.content.Context;
 import android.widget.ImageView;
 import com.azhe.testFileExplorer.FileIconLoader.IconLoadFinishListener;
 
@@ -12,6 +13,11 @@ import com.azhe.testFileExplorer.FileIconLoader.IconLoadFinishListener;
  */
 public class FileIconHelper implements IconLoadFinishListener {
 
+    private FileIconLoader mIconLoader;
+
+    public FileIconHelper(Context context) {
+        mIconLoader = new  FileIconLoader(context, this);
+    }
 
     @Override
     public void onIconLoadFinished(ImageView view) {
