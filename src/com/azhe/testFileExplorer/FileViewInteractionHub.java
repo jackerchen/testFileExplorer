@@ -36,6 +36,18 @@ public class FileViewInteractionHub implements IOperationProgressListener {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    public void setMode(Mode m) {
+        mCurrentMode = m;
+    }
+
+    public boolean isMoveState() {
+        return mFileOperationHelper.isMoveState() || mFileOperationHelper.canPaste();
+    }
+
+    public boolean isFileSelected(String filePath) {
+        return mFileOperationHelper.isFileSelected(filePath);
+    }
+
     public enum Mode {
         View, Pick
     }
