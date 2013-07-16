@@ -6,6 +6,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.azhe.testFileExplorer.FileOperationHelper.IOperationProgressListener;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: chenzhe
@@ -25,6 +27,10 @@ public class FileViewInteractionHub implements IOperationProgressListener {
     private Context mContext;
 
     private Mode mCurrentMode;
+
+    private View mConfirmOperationBar;
+
+    private ArrayList<FileInfo> mCheckedFileNameList = new ArrayList<FileInfo>();
 
     @Override
     public void onFinish() {
@@ -46,6 +52,27 @@ public class FileViewInteractionHub implements IOperationProgressListener {
 
     public boolean isFileSelected(String filePath) {
         return mFileOperationHelper.isFileSelected(filePath);
+    }
+
+    public Mode getMode() {
+        return mCurrentMode;
+    }
+
+    public boolean canShowCheckBox() {
+        return mConfirmOperationBar.getVisibility() != View.VISIBLE;
+    }
+
+    public void clearSelection() {
+        if (mCheckedFileNameList.size() > 0) {
+            for (FileInfo f : mCheckedFileNameList) {
+                if (f == null) {
+                    continue;
+                }
+                f.Selected = false;
+            }
+            mCheckedFileNameList.clear();
+            mFileViewListener.onDataChanged();
+        }
     }
 
     public enum Mode {
